@@ -32,12 +32,13 @@
     </header>
     <div id="container">
       <div class="card-group">
-        <div class="card listing">
-          <img src="https://picsum.photos/400/300?random=0" class="card-img-top" alt="매물">
+        <div class="card listing" v-for="(작명, i) in 원룸목록" :key="i">
+          <img :src="원룸목록[i].image" class="card-img-top" alt="매물">
           <div class="card-body">
-            <h5 class="card-title">{{ price1 }}만원/월</h5>
-            <p class="card-text address" @click="모달창열렸니=!false">{{ products[0] }}</p>
+            <h5 class="card-title price">{{ 원룸목록[i].price }}원/월</h5>
             <p class="card-text rooms">방 2개+화장실 1개</p>
+            <p class="card-text content">{{원룸목록[i].content}}</p>
+            <p class="card-text address" @click="모달창열렸니=!false">{{ 원룸목록[i].title }}</p>
             <p><a href="#">단와부동산</a></p>
             <ul class="remote-controller">
               <li><a href="#">📞</a></li>
@@ -45,39 +46,6 @@
               <li><a href="#">✅</a></li>
             </ul>
             <div class="reportbox"><button @click="신고수[0]++">신고</button><span>신고수: {{ 신고수[0] }}</span></div>
-            <a href="#" class="btn btn-primary">자세히 보기</a>
-          </div>
-        </div>
-        <div class="card listing">
-          <img src="https://picsum.photos/400/300?random=1" class="card-img-top" alt="매물">
-          <div class="card-body">
-            <h5 class="card-title">{{ price1 }}만원/월</h5>
-            <p class="card-text address">{{ products[1] }}</p>
-            <p class="card-text rooms">방 2개+화장실 1개</p>
-            <p><a href="#">단와부동산</a></p>
-            <ul class="remote-controller">
-              <li><a href="#">📞</a></li>
-              <li><a href="#">🚘</a></li>
-              <li><a href="#">✅</a></li>
-            </ul>
-            <div class="reportbox"><button @click="신고수[1]++">신고</button><span>신고수: {{ 신고수[1] }}</span></div>
-            <a href="#" class="btn btn-primary">자세히 보기</a>
-
-          </div>
-        </div>
-        <div class="card listing">
-          <img src="https://picsum.photos/400/300?random=2" class="card-img-top" alt="매물">
-          <div class="card-body">
-            <h5 class="card-title">{{ price1 }}만원/월</h5>
-            <p class="card-text address">{{ products[2] }}</p>
-            <p class="card-text rooms">방 2개+화장실 1개</p>
-            <p><a href="#">단와부동산</a></p>
-            <ul class="remote-controller">
-              <li><a href="#">📞</a></li>
-              <li><a href="#">🚘</a></li>
-              <li><a href="#">✅</a></li>
-            </ul>
-            <div class="reportbox"><button @click="신고수[2]++">신고</button><span>신고수: {{ 신고수[2] }}</span></div>
             <a href="#" class="btn btn-primary">자세히 보기</a>
           </div>
         </div>
@@ -101,11 +69,12 @@
 
 <script>
 // import HelloWorld from './components/HelloWorld.vue'
-
+import roomlist from "./assets/roomlist";
 export default {
   name: 'App',
   data() {
     return {
+      원룸목록: roomlist,
       price1: 60,
       스타일도됨: 'background-image:linear-gradient(to left, #f07167,#fed9b7)',
       products: ['역삼동 원룸', '천호동 원룸', '마포구 원룸'],
@@ -219,9 +188,9 @@ header nav ul {}
 }
 
 .black-bg{position: fixed; top: 0; left: 0; right: 0; bottom: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, .2); padding: 4%;}
-.black-bg .white-bg{width: 100%; border-radius: 8px; background: white; padding: 20px;}
-.black-bg .white-bg .closebtn{background: transparent; position: absolute; top: 5%; right: 8%;}
-
+.black-bg .white-bg{width: 100%; min-height: 400px; border-radius: 8px; background: white; padding: 20px;}
+.black-bg .white-bg .closebtn{float: right; background: transparent; transform: scale(1.5);}
+.black-bg .white-bg h4{clear: both;}
 footer {
   width: 100%;
   height: 10vh;
