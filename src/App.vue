@@ -31,7 +31,9 @@
       </nav>
     </header>
     <div id="container">
-      <CardWrap :원룸목록="원룸목록" :신고수="신고수"/>
+      <div class="card-group">
+        <ListingCard v-for="(a,i) in 원룸목록" :key="i" :원룸목록="원룸목록[i]" :신고수="신고수[i]" />
+      </div>
       <ModalWrap :모달창열렸니="모달창열렸니" :clickedIndex="clickedIndex" :원룸목록="원룸목록"/>
     </div>
     <BannerDiscount />
@@ -49,7 +51,7 @@
 import roomlist from "./assets/roomlist";
 import BannerDiscount from './components/Discount.vue';
 import ModalWrap from './components/Modal.vue';
-import CardWrap from './components/Card.vue';
+import ListingCard from './components/Card.vue';
 export default {
   name: 'App',
   data() {
@@ -60,8 +62,9 @@ export default {
       스타일도됨: 'background-image:linear-gradient(to left, #f07167,#fed9b7)',
       products: ['역삼동 원룸', '천호동 원룸', '마포구 원룸'],
       메뉴들: ['Home', 'For Sale', 'About'],
-      신고수: [0,0,0],
+      신고수: [0,0,0,0,0,0],
       모달창열렸니:false,
+      오브젝트:{name:'choi',age:30},
     }
   },
   methods: {
@@ -71,7 +74,7 @@ export default {
     // HelloWorld,
     BannerDiscount,
     ModalWrap,
-    CardWrap,
+    ListingCard,
   }
 }
 </script>
@@ -125,10 +128,6 @@ header h1 a img {
 header nav {}
 
 header nav ul {}
-
-.listing {
-  border-bottom: 1px solid #ddd;
-}
 
 #container {}
 
