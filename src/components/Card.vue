@@ -1,5 +1,5 @@
 <template>
-  <div class="card listing">
+  <div class="card listing" @click="$emit('openModal',원룸목록.id)">
     <img :src="원룸목록.image" class="card-img-top" alt="매물">
     <div class="card-body">
       <h5 class="card-title price">{{ 원룸목록.price }}원/월</h5>
@@ -13,7 +13,7 @@
         <li><a href="#">✅</a></li>
       </ul>
       <div class="reportbox"><button>신고</button><span>신고수: {{ 신고수 }}</span></div>
-      <a href="#" class="btn btn-primary">자세히 보기</a>
+      <a href="#" class="btn btn-primary" @click="$emit('openModal')">자세히 보기</a>
     </div>
   </div>
 </template>
@@ -23,7 +23,7 @@ export default {
   name: 'ListingCard',
   props: {
     원룸목록: Object,
-    신고수: Array,
+    신고수: Number,
   }
 }
 </script>
@@ -32,8 +32,7 @@ export default {
 .listing {
   border-bottom: 1px solid #ddd;
 }
-
-#container .card .remote-controller {
+.card .remote-controller {
   display: flex;
   justify-content: center;
   width: 100%;
@@ -41,30 +40,30 @@ export default {
   padding: 0;
 }
 
-#container .card .remote-controller li {
+.card .remote-controller li {
   width: 13.3333%;
   margin-right: 5%;
 }
 
-#container .card .remote-controller li a {
+.card .remote-controller li a {
   display: inline-block;
 }
 
-#container .card .remote-controller li:nth-child(1) a {
+.card .remote-controller li:nth-child(1) a {
   transform: translate(5px, 1.5px);
   font-size: 17px;
 }
 
-#container .card .remote-controller li:nth-child(2) a {
+.card .remote-controller li:nth-child(2) a {
   transform: translateY(-1px);
   font-size: 19px;
 }
 
-#container .card .remote-controller li:nth-child(3) {
+.card .remote-controller li:nth-child(3) {
   margin-right: 0;
 }
 
-#container .card .remote-controller li:nth-child(3) a {
+.card .remote-controller li:nth-child(3) a {
   transform: translateY(1px);
 }
 </style>

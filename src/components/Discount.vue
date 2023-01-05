@@ -13,9 +13,12 @@ export default {
 <style>
 .discount-wrapper {
     background: lightgreen;
-    height: 60px;
-    line-height: 60px;
-    margin-top: 20px;
-    transition: background 1s;
+    margin: 0; animation: bgTr 2s infinite;
 }
+.discount-wrapper p{width: 100%; }
+@keyframes bgTr {
+    from{}
+    to{background: orange}
+}
+.discount-wrapper p{height: 60px; line-height: 60px; font-weight: bold; font-size: 1.4rem; margin: 0 !important;}
 </style>

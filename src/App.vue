@@ -3,7 +3,7 @@
     <header>
       <nav class="navbar ">
         <h1><a class="navbar-brand" href="#"><img alt="Vue logo" src="./assets/logo.png">Vuedongsan</a></h1>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
+        <button class="navbar-toggler" type="button" @click="openGnb=!openGnb;" data-toggle="collapse" data-target="#navbarTogglerDemo02"
           aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -29,14 +29,15 @@
           </form>
         </div>
       </nav>
+      <GnbWrap :openGnb="openGnb"/>
     </header>
     <div id="container">
+      <BannerDiscount />
       <div class="card-group">
-        <ListingCard v-for="(a,i) in 원룸목록" :key="i" :원룸목록="원룸목록[i]" :신고수="신고수[i]" />
+        <ListingCard @openModal="모달창열렸니=true; clickedIndex=$event;" v-for="(a,i) in 원룸목록" :key="i" :원룸목록="원룸목록[i]" :신고수="신고수[i]" />
       </div>
-      <ModalWrap :모달창열렸니="모달창열렸니" :clickedIndex="clickedIndex" :원룸목록="원룸목록"/>
+      <ModalWrap @closeModal="모달창열렸니=false" :모달창열렸니="모달창열렸니" :clickedIndex="clickedIndex" :원룸목록="원룸목록"/>
     </div>
-    <BannerDiscount />
     <footer id="footer" :style="스타일도됨">
       <div class="inner">
         <address><a href="index.html">ⓒVuedongsan by 최혜진</a></address>
@@ -50,8 +51,9 @@
 // import HelloWorld from './components/HelloWorld.vue'
 import roomlist from "./assets/roomlist";
 import BannerDiscount from './components/Discount.vue';
-import ModalWrap from './components/Modal.vue';
 import ListingCard from './components/Card.vue';
+import ModalWrap from './components/Modal.vue';
+import GnbWrap from './components/Gnb.vue'
 export default {
   name: 'App',
   data() {
@@ -59,12 +61,13 @@ export default {
       clickedIndex: 0,
       원룸목록: roomlist,
       price1: 60,
-      스타일도됨: 'background-image:linear-gradient(to left, #f07167,#fed9b7)',
+      스타일도됨: 'background-image:linear-gradient(to left, rgb(103 240 183 / 96%), rgb(254, 217, 183))',
       products: ['역삼동 원룸', '천호동 원룸', '마포구 원룸'],
       메뉴들: ['Home', 'For Sale', 'About'],
       신고수: [0,0,0,0,0,0],
       모달창열렸니:false,
       오브젝트:{name:'choi',age:30},
+      openGnb:false,
     }
   },
   methods: {
@@ -73,8 +76,9 @@ export default {
   components: {
     // HelloWorld,
     BannerDiscount,
-    ModalWrap,
     ListingCard,
+    ModalWrap,
+    GnbWrap,
   }
 }
 </script>
@@ -101,6 +105,8 @@ a {
   color: #2c3e50 !important;
 }
 
+img{width: 100%;}
+
 button {
   border: none;
 }
@@ -121,6 +127,7 @@ header h1 {}
 header h1 a {}
 
 header h1 a img {
+  width: 28px;
   height: 28px;
   margin-right: 6px;
 }
