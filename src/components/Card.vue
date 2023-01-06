@@ -1,5 +1,5 @@
 <template>
-  <div class="card listing" @click="$emit('openModal',원룸목록.id)">
+  <div class="card listing" @click="emitOpen">
     <img :src="원룸목록.image" class="card-img-top" alt="매물">
     <div class="card-body">
       <h5 class="card-title price">{{ 원룸목록.price }}원/월</h5>
@@ -24,7 +24,10 @@ export default {
   props: {
     원룸목록: Object,
     신고수: Number,
-  }
+  },
+  methods:{
+    emitOpen(){this.$emit('openModal',this.원룸목록.id)},
+    },
 }
 </script>
 
@@ -32,6 +35,9 @@ export default {
 .listing {
   border-bottom: 1px solid #ddd;
 }
+.card a{text-decoration: none;}
+.card p{word-break: keep-all;}
+.card .card-body{display: flex; flex-direction: column; justify-content: space-between;}
 .card .remote-controller {
   display: flex;
   justify-content: center;

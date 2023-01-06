@@ -1,33 +1,9 @@
 <template>
   <div id="wrap">
     <header>
-      <nav class="navbar ">
+      <nav>
         <h1><a class="navbar-brand" href="#"><img alt="Vue logo" src="./assets/logo.png">Vuedongsan</a></h1>
-        <button class="navbar-toggler" type="button" @click="openGnb=!openGnb;" data-toggle="collapse" data-target="#navbarTogglerDemo02"
-          aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item" v-for="메뉴 in 메뉴들" :key="메뉴">
-              <a class="nav-link" href="#">{{ 메뉴 }} <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
-                Dropdown
-              </a>
-              <div class="dropdown-menu">
-                <a class="dropdown-item" href="#" v-for="메뉴 in 메뉴들" :key="메뉴">{{ 메뉴 }}</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Something else here</a>
-              </div>
-            </li>
-          </ul>
-          <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-          </form>
-        </div>
+        <button class="menubtn" type="button" @click="toggleMenu" ><span></span><span></span><span></span></button>
       </nav>
       <GnbWrap :openGnb="openGnb"/>
     </header>
@@ -72,6 +48,12 @@ export default {
   },
   methods: {
     increase(){this.신고수++},
+    toggleMenu(){
+      const btn=document.querySelector('.menubtn');
+      btn.classList.toggle('on');
+      this.openGnb=!this.openGnb;
+
+    },
   },
   components: {
     // HelloWorld,
@@ -101,14 +83,14 @@ li {
 }
 
 a {
-  text-decoration: none !important;
+  text-decoration: none;
   color: #2c3e50 !important;
 }
 
 img{width: 100%;}
 
 button {
-  border: none;
+  border: none; background: transparent;
 }
 
 .inner {
@@ -122,7 +104,7 @@ header {
   /* background-image: linear-gradient(-118deg, #ffcfd7, #ffd6bf); */
 }
 
-header h1 {}
+header h1 {font-size: 1.2rem; margin-bottom: unset;}
 
 header h1 a {}
 
@@ -132,10 +114,17 @@ header h1 a img {
   margin-right: 6px;
 }
 
-header nav {}
+header nav {height: 58px; line-height: 58px; display: flex; justify-content: space-between; align-items: center;}
 
-header nav ul {}
+header nav .menubtn {width: 34px; height: 34px; position: relative; }
+header nav .on span{transform: rotate(45deg);}
+header nav .on span::before{display: none;}
+header nav .on span::after{top: 0 !important; transform: rotate(90deg);}
 
+header nav .menubtn span{width: 30px; height: 2px; background-color: black; position: absolute; top: 50%; left: 2px; color: black;}
+header nav .menubtn:hover span,header nav .menubtn:hover span::before,header nav .menubtn:hover span::after{background: rgba(183, 230, 95, 0.685); transition: all .4s;}
+header nav .menubtn span::before{content: ''; background-color: black; height: 2px; width: 30px; position: absolute; bottom: 10px; left: 0;transition: all .4s;}
+header nav .menubtn span::after{content: ''; background-color: black; height: 2px; width: 30px; position: absolute; top: 10px; left: 0;transition: all .4s;}
 #container {}
 
 #container .card {}
